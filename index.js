@@ -11,7 +11,10 @@ app.use(express.urlencoded({extended:true}))
 app.use(cors())
 app.use(express.json())
 // app.use("/users",userRoute)
-
+// home route 
+app.get("/", (req,res)=>{
+    res.send("Welcome to Backend application")
+  })
 
 app.use("/users",userRoute)
 app.listen(PORT,async ()=>{
