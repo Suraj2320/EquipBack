@@ -3,17 +3,23 @@ const argon2=require("argon2")
 const jwt=require("jsonwebtoken")
 
 const signUp=async (req,res)=>{
+
     const {firstname,lastname,mobileNumber,password}=req.body
 //console.log(firstname,lastname,password);
 const hash=await argon2.hash(password)
+const validUser=await userModel.findOne({mobileNumber})
+
 try{
-    const user=new userModel({firstname,lastname,mobileNumber,password:hash})
+    if(validUser){
+        res.send({message:"User already exists"})
+    }
+    const user=    new userModel({ firstname, lastname, mobileNumber, password: hash })
     await user.save()    
-    return res.status(201).send("user created")
+   res.status(201).send("user created")
 }
 catch(e){
-    console.log(e.message)
-    return res.send(e.message)
+    // console.log(e.message)
+   res.send(e.message)
 }
 }
 

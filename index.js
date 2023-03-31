@@ -10,7 +10,7 @@ const userRoute=require("./src/view/userRoute")
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
 app.use(express.json())
-app.use("/users",userRoute)
+// app.use("/users",userRoute)
 
 
 app.use("/users",userRoute)
