@@ -15,11 +15,12 @@
 // module.exports = connect;
 
 
-const { mongoose } = require("mongoose");
-const dotenv = require("dotenv");
-dotenv.config();
-mongoose.set('strictQuery', true);
+const mongoose = require("mongoose");
+const dotenv = require('dotenv').config()
+const MONGO = process.env.MONGODB_URL
+mongoose.set('strictQuery', false)
+const connection = mongoose.connect(`${MONGO}`);
 
-const Connect= mongoose.connect(process.env.MONGODB_URL);
-
-module.exports = { Connect };
+module.exports = {
+  connection
+};
