@@ -31,8 +31,8 @@ const logIn=async (req,res)=>{
   console.log(user,password)
   if(user){
     if( await argon2.verify(user.password,password)){
-        const token=jwt.sign({id:user._id,firstname:user.firstname,lastname:user.lastname,mobileNumber:user.mobileNumber},"SECRET",{expiresIn:"24 hours"})
-        const refreshToken=jwt.sign({id:user._id,firstname:user.firstname,lastname:user.lastname,mobileNumber:user.mobileNumber},"REFRESH",{expiresIn:"7 days"})
+        const token=jwt.sign({id:user._id,mobileNumber:user.mobileNumber},"SECRET",{expiresIn:"24 hours"})
+        const refreshToken=jwt.sign({id:user._id,mobileNumber:user.mobileNumber},"REFRESH",{expiresIn:"7 days"})
         return res.status(201).send({message:"login sucess",token,refreshToken,user})
     }
     else{
